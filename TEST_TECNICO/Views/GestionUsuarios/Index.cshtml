@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TEST_TECNICO.Models.TUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Gestión de Usuarios</h1>
+
+@if(User.Identity.IsAuthenticated)
+{
+    <p style="padding-left: 85%;">
+        <a class="btn btn-outline-primary" asp-action="Create">+ Crear nuevo usuario</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellido)
+                </th>
+                <th>
+                    Correo electrónico
+                </th>
+                <th>
+                    Rol de usuario
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RolNavigation.Rolname)
+                    </td>
+                    <td>
+                        <a class="btn btn-dark"  asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
+                        <a class="btn btn-info"  asp-action="Details" asp-route-id="@item.Id">+ Info</a> 
+                        <a class="btn btn-danger"  asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
